@@ -28,5 +28,5 @@ public class HuffmanTree {
 	public String toString() {
 		return "HuffmanTree [cherset=" + cherset + ", huffmanTree=" + Arrays.toString(huffmanTree) + "]";
 	}
-	
+
 }
