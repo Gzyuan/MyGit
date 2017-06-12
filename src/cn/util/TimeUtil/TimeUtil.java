@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * @author gzy39
  * @version 1.0
+ * 2017/5/16
  */
 public class TimeUtil {
 	
@@ -104,6 +105,7 @@ public class TimeUtil {
 	 * @return Date
 	 * @author gzy39
 	 * @version 1.0
+	 * Î´Íê³É
 	 */
 	public static Date toDate(String dateStr,String format){
 		 Date date = new Date();

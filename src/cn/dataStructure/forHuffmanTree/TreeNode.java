@@ -1,23 +1,23 @@
 package cn.dataStructure.forHuffmanTree;
 
-public class TreeNode {
-	private int data;//数据
+public class TreeNode<T> {
+	private T data;//数据
 	private int parent;//父母
 	private int left;//左孩子
 	private int right;//右孩子
-	public TreeNode(int data, int parent, int left, int right) {
+	public TreeNode(T data) {
+		this(data,-1,-1,-1);
+	}
+	public TreeNode(T data, int parent, int left, int right) {
 		this.data = data;
 		this.parent = parent;
 		this.left = left;
 		this.right = right;
 	}
-	public TreeNode(int data) {
-		this(data, -1, -1,-1);
-	}
-	public int getData() {
+	public T getData() {
 		return data;
 	}
-	public void setData(int data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 	public int getParent() {
@@ -38,9 +38,10 @@ public class TreeNode {
 	public void setRight(int right) {
 		this.right = right;
 	}
-	@Override
-	public String toString() {
-		return "TreeNode [data=" + data + ", parent=" + parent + ", left=" + left + ", right=" + right + "]";
+	public boolean isLeaf(){
+		if(this.left==-1&&this.right==-1){
+			return true;
+		}
+		return false;
 	}
-	
 }
