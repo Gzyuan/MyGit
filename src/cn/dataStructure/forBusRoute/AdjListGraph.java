@@ -10,6 +10,10 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * @author gzy39
+ *图的对象，用来操作求通路与最短路径
+ */
 
 public class AdjListGraph {
 	private Map<String,Triple> adjlist = null;
@@ -48,10 +52,7 @@ public class AdjListGraph {
 		return matrx;
 	}
 	
-	public Map<String, Triple> getAdjlist() {
-		return adjlist;
-	}
-	
+	//获取边的对象
 	public Triple get(int start,int end){
 		Triple temp = this.adjlist.get(this.vertices[start]);//这只是邻接表
 		if(!(temp.getNext()==null)){
@@ -74,20 +75,19 @@ public class AdjListGraph {
 	
 	//生成路径
 	public List<ArrayList<String>> getPath(String start,String end){
-		//保存说有路线的集合
-		List<ArrayList<String>> allPath = new ArrayList<>();
-	
+		
+		List<ArrayList<String>> allPath = new ArrayList<>();//保存说有路线的集合
 		Stack<String> stack = new Stack<String>();
-		Map<String, Queue<String>> queueMap = new HashMap<String, Queue<String>>();
+		Map<String, Queue<String>> queueMap = new HashMap<String, Queue<String>>();//保存与各点的邻接点的队列
 		//把开始的点进栈
 		stack.push(start);
-		Triple temp = this.adjlist.get(start).getNext();
+		Triple temp = this.adjlist.get(start).getNext();//因为第一个拿出来的是邻接表，所以要next才是第一个点
 		String top = this.vertices[temp.getStart()];//保留栈顶元素，指针
 		String ss = "";//正在操作的元素
 		while(!(stack.isEmpty())){
-			Queue<String> topQueue = queueMap.get(top);
+			Queue<String> topQueue = queueMap.get(top);//拿出与top的邻接点的队列
 			if(topQueue==null){
-				/******/
+				/***广度搜索所有与top的邻接点***/
 					temp=this.adjlist.get(top);
 					Queue<String> queue = new LinkedList<String>();
 					while(!(temp.getNext()==null)){
@@ -102,25 +102,24 @@ public class AdjListGraph {
 			if(null == ss){//队列已经空了
 					stack.pop();//出栈
 					queueMap.remove(top);//把空队列去掉
-					if(!(stack.isEmpty())){
-						top=stack.peek();
+					if(!(stack.isEmpty())){//因为栈空时peek方法会报异常
+						top=stack.peek();//把top重新指向栈顶元素
 						}
 					continue;
 			}
-			
-			if(stack.contains(ss)){//如果是在栈里面，继续出列
+			if(stack.contains(ss)){//如果是在栈里面，不进栈
 				continue;//继续下一个循环
 			}else{
 				if(ss.equals(end)){//相等就输出
 					stack.add(ss);//
 					//输出
-					Iterator<String> iterator = stack.iterator();
+					Iterator<String> iterator = stack.iterator();//迭代器循环保存路线
 					ArrayList<String> route = new ArrayList<String>();//一条通路
 					while(iterator.hasNext()){
 						route.add(iterator.next());
 					}
 					allPath.add(route);
-					stack.pop();//
+					stack.pop();
 					continue;//继续下一个循环
 				}else{
 					stack.push(ss);//不相等就入栈
@@ -133,7 +132,7 @@ public class AdjListGraph {
 		return allPath;
 	}
 	
-	
+	//获取边的长度
 	public int weight(int i,int j){
 		if(i==j){
 			return 0;
@@ -145,7 +144,7 @@ public class AdjListGraph {
 		return temp.getValue();
 	}
 	
-	
+	//最短路径
 	public Stack<String> getShortestPath(int startIndex,int endIndex){
 		
 		int n = this.vertices.length;//图的顶点数
@@ -191,6 +190,7 @@ public class AdjListGraph {
 		this.shortestDistance = dist[endIndex];
 		return shortestPath;
 	}
+	//获取最短路径的长度
 	public int getShortestDistance() {
 		return shortestDistance;
 	}

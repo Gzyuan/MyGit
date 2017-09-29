@@ -1,5 +1,6 @@
 package cn.dataStructure.forHuffmanTree;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class WriteUtil {
-	public static void writeData(String path,byte[] data){
+	public static void writeData(File path,byte[] data){
 		FileOutputStream out = null;
 		try {
 			out = new FileOutputStream(path);

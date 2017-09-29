@@ -80,12 +80,15 @@ public class MyGUI extends JFrame implements ActionListener{
 		if(s.equals("a")){
 			compressFileChooser.showOpenDialog(this);
 			File path = compressFileChooser.getSelectedFile();
+			decompressFileChooser.showSaveDialog(this);
+			File newPath = decompressFileChooser.getSelectedFile();
 			if(path!=null){
 				jTextArea.append("正在压缩文件:"+path.getAbsolutePath()+"\n");
 				BaseUtil baseUtil = new BaseUtil();
-				jTextArea.append(baseUtil.compressFile(path)+"\n");
+				jTextArea.append(baseUtil.compressFile(path,newPath)+"\n");
 			}
 			compressFileChooser.setSelectedFile(null);
+			decompressFileChooser.setSelectedFile(null);
 		}
 		if(s.equals("b")){
 			decompressFileChooser.showOpenDialog(this);

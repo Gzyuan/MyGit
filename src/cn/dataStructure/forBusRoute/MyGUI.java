@@ -30,10 +30,10 @@ public class MyGUI extends JFrame implements ActionListener{
 	private JScrollPane jScrollPane =null;
 	private BaseUtil baseUtil = null;
 	public MyGUI(){
-		baseUtil = new BaseUtil();
+		baseUtil = new BaseUtil();//查询的对象
 		jPanel = new JPanel();
 		jLabelImg = new JLabel();
-		ImageIcon img = new ImageIcon("F:/BUS.jpg");
+		ImageIcon img = new ImageIcon("img/BUS.jpg");
 		jLabelImg.setIcon(img);
 		button = new JButton("查询");
 		button.addActionListener(this);
@@ -58,7 +58,7 @@ public class MyGUI extends JFrame implements ActionListener{
 		this.add(jLabelImg,"North");
 		this.add(jPanel,"Center");
 		this.add(jScrollPane,"South");
-		this.setIconImage(getToolkit().getImage("F:/logo.jpg"));
+		this.setIconImage(getToolkit().getImage("img/logo.jpg"));
 		
 		this.setSize(1700, 850);
 		this.setResizable(false);

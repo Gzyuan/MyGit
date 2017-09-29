@@ -1,8 +1,8 @@
 package cn.dataStructure.forBusRoute;
 
 public class BusRoute {
-	private String name;
-	private Station[] route;
+	private String name;//路线名
+	private Station[] route;//路线数组
 	public BusRoute(String name, Station[] route) {
 		//super();
 		this.name = name;

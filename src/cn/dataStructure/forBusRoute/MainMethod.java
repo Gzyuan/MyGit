@@ -6,5 +6,5 @@ public class MainMethod {
 		// TODO Auto-generated method stub
 			MyGUI myGUI = new MyGUI();
 	}
-
+	
 }

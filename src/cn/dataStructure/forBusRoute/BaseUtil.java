@@ -4,15 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-
+/***
+ * 
+ * @author gzy39
+ * 用来公交车路线与图的对接，主要实现路线的回溯功能
+ * 
+ */
 public class BaseUtil {
-	private AdjListGraph adjListGraph;
+	private AdjListGraph adjListGraph;//图的对象
 	private List<BusRoute> busList;
 	private String[] stationName;
 	
 	public BaseUtil(){
 		this.init();
 	}
+	//初始化图
 	private void init(){
 		//公交车路线的图
 		String[] vertices = {"A","B","C","D","E","F","G","H","I","J"};
@@ -181,14 +187,12 @@ public class BaseUtil {
 					BusRoute temp = this.busList.get(k);
 					Station[] sTemp=temp.getRoute();
 					
-					if(null!=sTemp[second]&&sTemp[second].getParentIndex()==first){
+					if(null!=sTemp[second]&&sTemp[second].getParentIndex()==first){//回溯乘哪辆bus(从左回溯)
 						sb.append(temp.getName()+"车，");
 					}
-					if(null!=sTemp[second]&&sTemp[second].getChildIndex()==first){
+					if(null!=sTemp[second]&&sTemp[second].getChildIndex()==first){//回溯乘哪辆bus(从右回溯)
 						sb.append(temp.getName()+"车，");
 					}
-					
-				
 				}
 				sb.append("到"+this.stationName[second]+"站,然后");
 			}
@@ -197,7 +201,9 @@ public class BaseUtil {
 		}
 		return sb.toString();
 	}
-	//求最短路径
+	
+	
+	//求最短路径,回溯过程类似于求通路
 	public String getShortestPath(String start,String end){
 		Stack<String> shortestPath = this.adjListGraph.getShortestPath(changeIndex(start), changeIndex(end));
 		StringBuffer sb = new StringBuffer();
@@ -225,6 +231,8 @@ public class BaseUtil {
 		sb.append("到终点"+end+"站,最短距离为"+this.adjListGraph.getShortestDistance()+"\n");
 		return sb.toString();
 	}
+	
+	
 	//把站点转成对应的索引
 	public int changeIndex(String s){
 		for(int i=0;i<this.stationName.length;i++){
@@ -234,11 +242,4 @@ public class BaseUtil {
 		}
 		return -1;
 	}
-	public AdjListGraph getAdjListGraph() {
-		return adjListGraph;
-	}
-	public void setAdjListGraph(AdjListGraph adjListGraph) {
-		this.adjListGraph = adjListGraph;
-	}
-	
 }
